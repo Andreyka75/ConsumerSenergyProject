@@ -14,7 +14,7 @@ describe('Saving calculator Heat Prices calculations test',{defaultCommandTimeou
     const New_Heating_Cost_field = '[id="NHC"]';
     const Annual_Heating_Savings_field = '[id="AHS"]';
 
-    before(() => {
+    beforeEach(() => {
         cy.visit('https://consumersenergymanagement.ca/savings-calculator/')
 
     })
