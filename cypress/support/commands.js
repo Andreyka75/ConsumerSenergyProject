@@ -23,7 +23,7 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-import selectors from '../../../consumerSenergyManagementProject/cypress/support/selectors.js'
+import selectors from '../support/selectors.js'
 Cypress.Commands.add('clickOnHomeTab', () => {
     cy.get(selectors.Home_tab).should("be.visible").invoke('text').should('eq', 'Home')
     cy.get(selectors.Home_tab).click().url().should("eq", "https://consumersenergymanagement.ca/")
@@ -38,19 +38,19 @@ Cypress.Commands.add('clickOnAboutTab', () => {
 
 })
 Cypress.Commands.add('clickOnProductsTab', () => {
-    cy.get(selectors.Products_tab).should("be.visible").should("have.text","Products")
+    cy.get(selectors.Products_tab).should("be.visible").contains("Products")
     cy.get(selectors.Products_tab).click().url().should("eq", "https://consumersenergymanagement.ca/products/")
     cy.get("h1").contains('Products')
 
 })
 Cypress.Commands.add('clickOnServicesTab', () => {
-    cy.get(selectors.Services_tab).should("be.visible").invoke('text').should("eq","Services")
+    cy.get(selectors.Services_tab).should("be.visible").invoke('text').should("contain","Services")
     cy.get(selectors.Services_tab).click().url().should("eq", "https://consumersenergymanagement.ca/services/")
     cy.get("h1").contains('Services')
 
 })
 Cypress.Commands.add('clickOnToolsTab', () => {
-    cy.get(selectors.Tools_tab).should("be.visible").invoke('text').should("eq","Tools")
+    cy.get(selectors.Tools_tab).should("be.visible").invoke('text').should("contain","Tools")
     cy.get(selectors.Tools_tab).click().url().should("eq", "https://consumersenergymanagement.ca/tools-resources/")
     cy.get("h1").contains('Tools & Resources')
 

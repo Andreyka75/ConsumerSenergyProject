@@ -4,10 +4,12 @@
 // import commands from '../support/commands.js'
 
 describe('Main Page Sanity testing', () => {
-  it('navigate to the main page',{defaultCommandTimeout: 60000}, () => {
+  beforeEach('navigate to the main page', () => {
     cy.visit('/')
+    
+  })
+  it('verify correct URL',{defaultCommandTimeout: 60000},()=>{
     cy.url().should('eq', 'https://consumersenergymanagement.ca/')
-
   })
   it('verify clicking on Home tab',{defaultCommandTimeout: 60000}, () => {
     

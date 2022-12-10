@@ -1,0 +1,12 @@
+{
+    "data": [
+        {
+            "Gas_Therm_field":"1.55",
+            "Propane_Gal_field":"6",
+            "Oil_Gal_field":"5.5",
+            "Summer_KWHR_field":"0.25",
+            "Winter_KWHR_field":"0.34"
+        
+        }
+    ]
+}
