@@ -9,7 +9,7 @@ export default {
     Blog_tab: '#menu-item-1725',
     FAQs_tab: '#menu-item-1727',
     Contact_tab: '#menu-item-1726',
-    SavingCalculator_button: '[id="text-2"]',
+    //SavingCalculator_button: '[id="text-2"]',
     Provinces_selector:'[name="nastates"]',
     City_selector:'[name="stage2"]',
     Stories_selector:'[name="stories"]',
@@ -26,7 +26,7 @@ export default {
 
     [
         'Alberta',
-        'British Columbia',
+        //'British Columbia',
         'Manitoba',
         'New Brunswick',
         'Newfoundland',
@@ -34,7 +34,7 @@ export default {
         'Ontario',
         'Quebec',
         'Saskatechewan',
-        'Prince Edward Island'
+        //'Prince Edward Island'
 
     ],
     City:
