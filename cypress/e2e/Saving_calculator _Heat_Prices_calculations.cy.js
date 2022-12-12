@@ -19,6 +19,11 @@ describe('Saving calculator Heat Prices calculations test', { defaultCommandTime
     const Efficiency_Level_of_New_System_field='[name="eheatingtype"]';
     const Annual_Heating_Savings_label='#step2col3 > :nth-child(1)';
     const Annual_Heating_Savings_field = '[id="AHS"]';
+    const Total_Annual_Combined_Savings_Label='[id="totalleft"]';
+    const Total_Annual_Combined_Savings_field='[id="VTAS"]';
+    const Ten_Year_Extended_Savings_Label='[id="totalright"]';
+    const Ten_Year_Extended_Savings_field='[id="VTES"]';
+
 
     beforeEach(() => {
         cy.visit('https://consumersenergymanagement.ca/savings-calculator/')
@@ -179,6 +184,61 @@ describe('Saving calculator Heat Prices calculations test', { defaultCommandTime
         cy.get(New_Heating_System_field).select("Oil").invoke('val').should('eq', 'Oil')
         cy.get(Annual_Heating_Savings_field).should("have.text", "$48,710.37").should("be.visible")
         
+    })
+    
+    it('Verify that when new and old types are chosen, total savings are updated',()=>{
+
+        cy.get(selectors.Provinces_selector).select("Manitoba").invoke('text').should('contain', "Manitoba")
+        cy.get(selectors.City_selector).select("Winnepeg").invoke('text').should('contain', "Winnepeg")
+        cy.get(selectors.Stories_selector).select("2 + Basement").invoke('val').should('eq', "2+")
+        cy.get(selectors.Squar_feet_selector).select("1750").invoke('val').should('eq', "1750")
+        cy.get(selectors.House_age).clear().type("30").should("have.value", "30")
+
+        data1.forEach(element => {
+            cy.get(selectors.Gas_Therm_field).clear().type(element.Gas_Therm_field).invoke('val').should('eq', element.Gas_Therm_field)
+
+            cy.get(selectors.Propane_Gal_field).clear().type(element.Propane_Gal_field).invoke('val').should('eq', element.Propane_Gal_field)
+
+            cy.get(selectors.Oil_Gal_field).clear().type(element.Oil_Gal_field).invoke('val').should('eq', element.Oil_Gal_field)
+
+            cy.get(selectors.Summer_KWHR_field).clear().type(element.Summer_KWHR_field).invoke('val').should('eq', element.Summer_KWHR_field)
+
+            cy.get(selectors.Winter_KWHR_field).clear().type(element.Winter_KWHR_field).invoke('val').should('eq', element.Winter_KWHR_field)
+
+        })
+
+        cy.get(selectors.Current_Heating_System_label).contains("Current Heating System").should("be.visible")
+        cy.get(Current_Heating_System_field).should("be.visible").children().first().should("have.text", "Current Heater")
+        cy.get(selectors.Current_Heating_Cost_label).contains("Current Heating Cost: ").should("be.visible")
+        
+        cy.get(selectors.New_Heating_System_label).contains("New Heating System").should("be.visible")
+        cy.get(New_Heating_System_field).should("be.visible").children().first().should("have.text", "New Heater")
+        cy.get(selectors.New_Heating_cost_label).contains("New Heating Cost: ").should("be.visible")
+
+        cy.get(Total_Annual_Combined_Savings_Label).contains("Total Annual Combined Savings").should("be.visible")
+        cy.get(Ten_Year_Extended_Savings_Label).contains("10 Year Extended Savings").should("be.visible")
+
+        cy.get(Efficiency_Level_of_Current_System_field).invoke('val').should("eq","55")
+        cy.get(Efficiency_Level_of_New_System_field).invoke('val').should("eq","55")
+
+        cy.get(Current_Heating_Cost_field).contains("$0.00").should("be.visible")
+        cy.get(New_Heating_Cost_field).contains("$0.00").should("be.visible")
+
+        cy.get(Current_Heating_System_field).select("Natural Gas").invoke('val').should('eq', 'aNaturalGas')
+        cy.get(New_Heating_System_field).select("Oil").invoke('val').should('eq', 'Oil')
+        cy.get(Total_Annual_Combined_Savings_field).should("have.text", "-$4,175.05").should("be.visible")
+        cy.get(Ten_Year_Extended_Savings_field).should("have.text", "-$41,750.49").should("be.visible")
+
+
+        
+        cy.get(Current_Heating_System_field).select("Propane").invoke('val').should('eq', 'Propane')
+        cy.get(New_Heating_System_field).select("Oil").invoke('val').should('eq', 'Oil')
+        cy.get(Total_Annual_Combined_Savings_field).should("have.text", "$25,089.72").should("be.visible")
+        cy.get(Ten_Year_Extended_Savings_field).should("have.text", "$250,897.24").should("be.visible")
+
+        
+        
+
     })
 
 
